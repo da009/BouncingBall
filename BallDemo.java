@@ -34,19 +34,18 @@ public class BallDemo
 
         // draw the ground
         myCanvas.drawLine(50, ground, 550, ground);
-        int x = 0;
-        int y = 0;
         
         // Crea bolas hasta q llega al número introducido por el usuario.
-        for (int cont = 0; cont <=numBolas; cont++)
+        for (int cont=0; cont<numBolas; cont++)
         {
+            Random rnd = new Random();
+            // genera un número aleatorio dentro del rango
+            int x = rnd.nextInt(200);
+            int y =  rnd.nextInt(200);
             // crate and show the balls
-            BouncingBall ball = new BouncingBall(x, y, 16, Color.BLUE, ground, myCanvas);
+            BouncingBall ball = new BouncingBall(x, y, 20, Color.BLUE, ground, myCanvas);
             ball.draw();
             bolas.add(ball);
-            x = x+5;
-            y = y+10;
-            cont++;
         }
         // make them bounce
         boolean finished =  false;
