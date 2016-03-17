@@ -47,7 +47,7 @@ public class BallDemo
             int g = rnd.nextInt(256);
             int b = rnd.nextInt(256);
             
-            int radio =  rnd.nextInt(100);
+            int radio =  rnd.nextInt(200);
             // crate and show the balls
             BouncingBall ball = new BouncingBall(x, y, radio, new Color(r, g, b), ground, myCanvas);
             ball.draw();
@@ -55,17 +55,16 @@ public class BallDemo
         }
         // make them bounce
         boolean finished =  false;
-        int index = 0;
         while(!finished) {
             for(BouncingBall ball : bolas)
                 {
                 myCanvas.wait(50);           // small delay
                 ball.move();
                 // stop once ball has travelled a certain distance on x axis
-                if(ball.getXPosition() >= 550) {
+                if(ball.getXPosition() > 550) {
                     finished = true;
                 }
-            }
+           }
         }
     }
 }
