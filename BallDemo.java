@@ -42,8 +42,12 @@ public class BallDemo
             // genera un número aleatorio dentro del rango
             int x = rnd.nextInt(200);
             int y =  rnd.nextInt(200);
+            
+            int r = rnd.nextInt(256);
+            int g = rnd.nextInt(256);
+            int b = rnd.nextInt(256);
             // crate and show the balls
-            BouncingBall ball = new BouncingBall(x, y, 20, Color.BLUE, ground, myCanvas);
+            BouncingBall ball = new BouncingBall(x, y, 20, new Color(r, g, b), ground, myCanvas);
             ball.draw();
             bolas.add(ball);
         }
