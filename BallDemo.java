@@ -46,8 +46,10 @@ public class BallDemo
             int r = rnd.nextInt(256);
             int g = rnd.nextInt(256);
             int b = rnd.nextInt(256);
+            
+            int radio =  rnd.nextInt(100);
             // crate and show the balls
-            BouncingBall ball = new BouncingBall(x, y, 20, new Color(r, g, b), ground, myCanvas);
+            BouncingBall ball = new BouncingBall(x, y, radio, new Color(r, g, b), ground, myCanvas);
             ball.draw();
             bolas.add(ball);
         }
