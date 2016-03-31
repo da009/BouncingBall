@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.Random;
 
 /**
  * Write a description of class BoxBall here.
@@ -9,17 +10,18 @@ import java.awt.geom.*;
  */
 public class BoxBall
 {
-    private static final int GRAVITY = 3;  // effect of gravity
-
-    private int ballDegradation = 2;
     private Ellipse2D.Double circle;
     private Color color;
     private int diameter;
     private int xPosition;
     private int yPosition;
     private final int groundPosition;      // y position of ground
+    private final int sup;      // margen superior
+    private final int iz;      // margen izquierdo
+    private final int der;      // margen superior derecho
     private Canvas canvas;
     private int ySpeed = 1;                // initial downward speed
+    private int xSpeed = 1;
 
     /**
      * Constructor for objects of class BouncingBall
@@ -31,15 +33,21 @@ public class BoxBall
      * @param groundPos  the position of the ground (where the wall will bounce)
      * @param drawingCanvas  the canvas to draw this ball on
      */
-    public BoxBall(int xPos, int yPos, int ballDiameter, Color ballColor,
-                        int groundPos, Canvas drawingCanvas)
+    public BoxBall(int xPos, int yPos, int ballDiameter, Color ballColor, int superior,
+                        int groundPos, int izquierda, int derecha, Canvas drawingCanvas)
     {
         xPosition = xPos;
         yPosition = yPos;
         color = ballColor;
         diameter = ballDiameter;
         groundPosition = groundPos;
+        sup = superior;
+        iz = izquierda;
+        der = derecha;
         canvas = drawingCanvas;
+        
+        xSpeedChange();
+        ySpeedChange();
     }
 
     /**
@@ -68,15 +76,36 @@ public class BoxBall
         erase();
             
         // compute new position
-        ySpeed += GRAVITY;
+        ySpeed += 0;
         yPosition += ySpeed;
-        xPosition +=2;
+        
+        xSpeed +=0;
+        xPosition += xSpeed;
 
         // check if it has hit the ground
-        if(yPosition >= (groundPosition - diameter) && ySpeed > 0) {
+        if(yPosition >= (groundPosition - diameter)) {
             yPosition = (int)(groundPosition - diameter);
-            ySpeed = -ySpeed + ballDegradation; 
+            ySpeed = -ySpeed; 
         }
+        
+        // comprueba que no supere la altura del rectángulo
+        if(yPosition <= (sup + diameter)) {
+            yPosition = (int)(sup + diameter);
+            ySpeed = -ySpeed; 
+        }
+        
+        // comprueba si ha llegado a la derecha
+        if(xPosition >= (der - diameter)) {
+            xPosition = (int)(der - diameter);
+            xSpeed = -xSpeed; 
+        }
+        
+        // comprueba si ha llegado a la izquierda
+        if(xPosition <= (iz - diameter)) {
+            xPosition = (int)(iz - diameter);
+            xSpeed = -xSpeed; 
+        }
+        
 
         // draw again at new position
         draw();
@@ -96,5 +125,35 @@ public class BoxBall
     public int getYPosition()
     {
         return yPosition;
+    }
+    
+    private int xSpeedChange()
+    {
+        Random rnd = new Random();
+        int x = rnd.nextInt(100);
+        if (x > 50)
+        {
+            xSpeed = -xSpeed;
+        }
+        else
+        {
+            xSpeed = xSpeed;
+        }
+        return xSpeed;
+    }
+    
+    private int ySpeedChange()
+    {
+        Random rnd = new Random();
+        int y = rnd.nextInt(100);
+        if (y > 50)
+        {
+            ySpeed = -ySpeed;
+        }
+        else
+        {
+            ySpeed = ySpeed;
+        }
+        return ySpeed;
     }
 }
