@@ -99,13 +99,13 @@ public class BallDemo
             int r = rnd.nextInt(256);
             int g = rnd.nextInt(256);
             int b = rnd.nextInt(256);
-            while (x < 50)
+            while (x < 100)
             {
-                x = rnd.nextInt(550);
+                x = rnd.nextInt(500);
             }
-            while (y < 100)
+            while (y < 150)
             {
-                y = rnd.nextInt(400);
+                y = rnd.nextInt(350);
             }
             // crate and show the balls
             BoxBall ball = new BoxBall(x, y, 50,  new Color(r, g, b), 50, 400, 100, 550, myCanvas);
