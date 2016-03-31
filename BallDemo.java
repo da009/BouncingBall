@@ -34,7 +34,7 @@ public class BallDemo
 
         // draw the ground
         myCanvas.drawLine(50, ground, 550, ground);
-        
+
         // Crea bolas hasta q llega al número introducido por el usuario.
         for (int cont=0; cont<numBolas; cont++)
         {
@@ -42,11 +42,11 @@ public class BallDemo
             // genera un número aleatorio dentro del rango
             int x = rnd.nextInt(200);
             int y =  rnd.nextInt(200);
-            
+
             int r = rnd.nextInt(256);
             int g = rnd.nextInt(256);
             int b = rnd.nextInt(256);
-            
+
             int radio =  rnd.nextInt(200);
             // crate and show the balls
             BouncingBall ball = new BouncingBall(x, y, radio, new Color(r, g, b), ground, myCanvas);
@@ -56,15 +56,15 @@ public class BallDemo
         // make them bounce
         boolean finished =  false;
         while(!finished) {
+            myCanvas.wait(50); 
             for(BouncingBall ball : bolas)
-                {
-                myCanvas.wait(50);           // small delay
+            {          // small delay
                 ball.move();
                 // stop once ball has travelled a certain distance on x axis
                 if(ball.getXPosition() > 550) {
                     finished = true;
                 }
-           }
+            }
         }
     }
 }
